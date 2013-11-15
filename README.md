@@ -21,7 +21,7 @@ Disadvantages:
 
 Say we have the following block of code in vim:
 
-```
+```python
 paragraph one
 
 x = 23.21
@@ -35,7 +35,7 @@ paragraph three
 
 If you have your cursor in that second paragraph you can evaluate it with `{V}!pycalc` in vim (assuming pycalc is in your path and your Python is located at `/usr/bin/python`). The result is the following:
 
-```
+```python
 paragraph one
 
 x = 23.21
@@ -49,7 +49,7 @@ paragraph three
 
 ## pymap
 
-This script started as some ideas to into my head while writing pycalc. Basically it lets you write small Python functions (really just [lambdas](http://docs.python.org/2/reference/expressions.html#lambda)) and apply them (i.e. [map](http://docs.python.org/2/library/functions.html#map)) to each input line.
+This script started as some ideas that got into my head while writing pycalc. Basically it lets you write small Python functions (really just [lambdas](http://docs.python.org/2/reference/expressions.html#lambda)) and apply them (i.e. [map](http://docs.python.org/2/library/functions.html#map)) to each input line.
 
 *This documentation is incomplete*
 
@@ -73,7 +73,7 @@ At this point the best way to explain it is to look at examples.
 
 Input:
 
-```
+```python
 [1, 2, 3]
 [4, 5, 6, 7]
 [8, 9, 10, 11, 12]
@@ -82,7 +82,7 @@ Input:
 
 After evaluating all lines (such as `ggVG!pymap` in vim):
 
-```
+```python
 6
 22
 50
@@ -91,7 +91,7 @@ After evaluating all lines (such as `ggVG!pymap` in vim):
 
 If you prefer keeping the input, you can do the following:
 
-```
+```python
 [1, 2, 3] # 6
 [4, 5, 6, 7] # 22
 [8, 9, 10, 11, 12] # 50
@@ -102,7 +102,7 @@ If you prefer keeping the input, you can do the following:
 
 Input:
 
-```
+```text
 John, [1, 2, 3]
 Sarah, [4, 5, 6, 7]
 Bob, [8, 9, 10, 11, 12]
@@ -113,7 +113,7 @@ Bob, [8, 9, 10, 11, 12]
 
 After evaluating all lines (such as `ggVG!pymap` in vim):
 
-```
+```text
 Sum of John's items: 6
 Sum of Sarah's items: 22
 Sum of Bob's items: 50
@@ -122,3 +122,30 @@ Sum of Bob's items: 50
 !*name, items: 'Sum of %s\'s items: %d' % (name, sum(items))
 ```
 
+#### Example 3
+
+This example uses NumPy which you can enable by uncommenting the import lines at the top of the script (I should probably change those to try-import blocks).
+
+```
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+!x: ast.literal_eval(x)
+*x: np.array(x)
+=x: np.mean(x)
+!x: 10*x
+=x: np.mean(x)
+```
+
+After evaluating all lines (such as `ggVG!pymap` in vim):
+
+```
+[10 20 30]
+[40 50 60]
+[70 80 90]
+!x: ast.literal_eval(x)
+*x: np.array(x)
+=x: np.mean(x)# = 5.0
+!x: 10*x
+=x: np.mean(x)# = 50.0
+```

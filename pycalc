@@ -4,8 +4,10 @@
 #import scipy as sp
 #import scipy.ndimage as nd
 #import scipy.signal as sg
+
 from math import *
-import datetime, itertools, pickle, random, os, sys
+import ast, datetime, itertools, pickle, random, os, sys
+
 for line in sys.stdin.readlines():
     line = line[:line.rfind('#')]
     try:

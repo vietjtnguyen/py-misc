@@ -1,0 +1,19 @@
+#!/usr/bin/python
+#import numpy as np
+#import pandas as pd
+#import scipy as sp
+#import scipy.ndimage as nd
+#import scipy.signal as sg
+from math import *
+import datetime, itertools, pickle, random, os, sys
+for line in sys.stdin.readlines():
+    line = line[:line.rfind('#')]
+    try:
+        code_object = compile(line, '', 'eval')
+        output = '# = {:}'.format(str(eval(code_object)))
+    except SyntaxError as e:
+        code_object = compile(line, '', 'exec')
+        exec code_object
+        output = ''
+    print('{:}{:}'.format(str(line).strip(), output))
+

@@ -4,7 +4,7 @@
 
 Inspired by [Crunch](http://ryanpcarney.com/technologblog/crunch-gets-crunchier-with-v20) I wrote up a Python script to do something similar. It allows for inline, line-by-line (i.e. no function definitions and for loops) code execution with appended results. Really the only difference between passing the code to Python directly is that it will append the results of expressions to the end of the line as a comment.
 
-It is written with the intention of execution in vim like Crunch, but will happily accept anything from standard input.
+It is written with the intention of execution in vim like Crunch, but will happily accept anything from standard input. The intended use is via [vim's filter operation](http://vimdoc.sourceforge.net/htmldoc/various.html#:!) (also see [this post](http://usevim.com/2012/06/29/vim101-pipe/)), which is really *really* awesome.
 
 Advantages:
 
@@ -102,7 +102,7 @@ If you prefer keeping the input, you can do the following:
 
 Input:
 
-```text
+```python
 John, [1, 2, 3]
 Sarah, [4, 5, 6, 7]
 Bob, [8, 9, 10, 11, 12]
@@ -126,7 +126,7 @@ Sum of Bob's items: 50
 
 This example uses NumPy which you can enable by uncommenting the import lines at the top of the script (I should probably change those to try-import blocks).
 
-```
+```python
 [1, 2, 3]
 [4, 5, 6]
 [7, 8, 9]
@@ -139,7 +139,7 @@ This example uses NumPy which you can enable by uncommenting the import lines at
 
 After evaluating all lines (such as `ggVG!pymap` in vim):
 
-```
+```python
 [10 20 30]
 [40 50 60]
 [70 80 90]
